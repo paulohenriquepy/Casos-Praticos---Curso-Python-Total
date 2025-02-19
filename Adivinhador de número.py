@@ -2,8 +2,6 @@ from random import randint
 
 numero_aleatorio = randint(1, 100)
 
-# Tenho a vaga lembrança de que esse while vem aqui em cima
-
 nome = input("Qual teu nome, amigo? ")
 print(f"Então, amigo {nome}. Você tem 8 chances para acertar um número entre 1 e 100.")
 
