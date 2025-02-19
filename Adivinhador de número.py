@@ -4,14 +4,14 @@ numero_aleatorio = randint(1, 100)
 
 # Tenho a vaga lembrança de que esse while vem aqui em cima
 
-nome = input("Qual teu nome, comparsa? ")
-print(f"Então, comparsa {nome}. Você tem 8 chances para acertar um número entre 1 e 100.")
+nome = input("Qual teu nome, amigo? ")
+print(f"Então, amigo {nome}. Você tem 8 chances para acertar um número entre 1 e 100.")
 
 tentativas = 1
 
 while tentativas < 9:
 
-    numero_ingressado = int(input("Diz o número, comparsa: "))
+    numero_ingressado = int(input("Diz o número, amigo: "))
 
     if numero_ingressado < 1 or numero_ingressado > 100:
         print("Esse valor não é permitido. Diga um número entre 1 e 100.")
