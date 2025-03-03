@@ -31,13 +31,11 @@ def pedir_letra():
 
     return letra_ingressada
 
-def conferir_letra(letra_ingressada, palavra_secreta, letras_incorretas, numero_de_vidas):
+def conferir_letra(letra_ingressada, palavra_secreta, letras_incorretas, numero_de_vidas, revelacao):
 
 
-    numero_de_linhas = '-' * len(palavra_secreta)
-    linhas_em_listas = list(numero_de_linhas)
-    resultado = ''
-
+    linhas_em_listas = list(revelacao)
+    resultado = revelacao
 
     if letra_ingressada in palavra_secreta:
 
@@ -45,9 +43,7 @@ def conferir_letra(letra_ingressada, palavra_secreta, letras_incorretas, numero_
         for indice in indices:
             linhas_em_listas[indice] = letra_ingressada
             resultado = ''.join(linhas_em_listas)
-        print(resultado)
-        numero_de_linhas = resultado.count('-')
-        numero_de_vidas = numero_de_vidas - len(letras_incorretas)
+
         print(f"Você agora possui {numero_de_vidas} vidas.")
 
 
@@ -55,25 +51,26 @@ def conferir_letra(letra_ingressada, palavra_secreta, letras_incorretas, numero_
         letras_incorretas.append(letra_ingressada)
         print(f"A letra {letra_ingressada} não faz parte da palavra secreta.")
         print(f"As letras incorretas são {letras_incorretas}.")
-        numero_de_vidas = numero_de_vidas - len(letras_incorretas)
+        numero_de_vidas = numero_de_vidas - 1
         print(f"Você agora possui {numero_de_vidas} vidas.")
 
-    lista = numero_de_vidas, numero_de_linhas, resultado
+    lista = numero_de_vidas, resultado
 
     return lista
 
-def contar_vidas(lista):
+def verificar_vitoria(lista, palavra):
 
     numero_de_vidas = lista[0]
-    numero_de_linhas = lista[1]
-    resultado = lista[2]
+    palavra_intermediaria = lista[1]
 
-    if resultado == palavra:
-        print("Parabéns. Você acertou a palavra.")
+    if palavra_intermediaria == palavra:
+        print("Parabéns. Você acertou a palavra secreta.")
+        return True
+
     else:
-        print("Você ainda não acertou a palavra.")
+        print("Você ainda não acertou a palavra secreta.")
 
-    return numero_de_vidas
+        return False
 
 
 letras_incorretas = []
@@ -81,15 +78,27 @@ letras_incorretas = []
 numero_de_vidas = 6
 
 palavra = sortear_palavras()
+revelacao = '-' * len(palavra)
+
 
 while numero_de_vidas > 0:
-    letra = pedir_letra()
-    vidas = conferir_letra(letra, palavra, letras_incorretas, numero_de_vidas)
-    verificacao = contar_vidas(vidas)
+     letra = pedir_letra()
+     vidas = conferir_letra(letra, palavra, letras_incorretas, numero_de_vidas, revelacao)
+     numero_de_vidas = vidas[0]
+     revelacao = vidas[1]
+     print(revelacao)
+     verificacao = verificar_vitoria(vidas, palavra)
 
-    if numero_de_vidas == 0:
-        print("Fim de jogo.")
-        break
+     if verificacao == True:
+         print("Parabéns. Você acertou")
+         break
+
+     if numero_de_vidas == 0:
+         print("Fim de jogo")
+         break
+
+
+
 
 
 
